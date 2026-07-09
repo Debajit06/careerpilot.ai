@@ -123,7 +123,7 @@ const Interview = () => {
             {/* Top Navbar */}
             <nav className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 border-b border-zinc-800">
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-                    <span className="p-1.5 bg-green-600 rounded-lg text-white font-bold text-sm leading-none flex items-center justify-center">CP</span>
+                    <img src="/logo.png" alt="CareerPilot Logo" className="w-8 h-8 object-contain rounded-lg" />
                     <span className="font-bold text-lg text-white tracking-wide">CareerPilot.ai</span>
                 </div>
                 <div className="flex items-center gap-4">
