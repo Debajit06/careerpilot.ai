@@ -10,8 +10,10 @@ app.use(express.json());
 app.use(cookie());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:[
+      "http://localhost:5173",
             "https://careerpilot-ai-frontend-tsfh.onrender.com",
+      ],
     credentials: true,
   }),
 );
