@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://careerpilot-ai-backend-390l.onrender.com",
+  baseURL: import.meta.env.DEV
+    ? "http://localhost:8080"
+    : "https://careerpilot-ai-backend-390l.onrender.com",
   withCredentials: true,
 });
 

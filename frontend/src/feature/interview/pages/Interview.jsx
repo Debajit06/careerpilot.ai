@@ -70,10 +70,11 @@ const RoadMapDay = ({ day }) => (
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
-    const { user, loading: authLoading } = useAuth()
+    const { user, loading: authLoading, handleLogout } = useAuth()
     const [activeNav, setActiveNav] = useState('technical')
     const { report, getReportById, loading, getResumePdf, loadingText } = useInterview()
     const { interviewId } = useParams()
+    const navigate = useNavigate()
 
     if (!authLoading && !user) {
         return <Navigate to="/login" replace />
@@ -118,8 +119,35 @@ const Interview = () => {
         'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]'
 
     return (
-        <div className='min-h-screen bg-black text-zinc-200 p-4 md:p-8 font-sans selection:bg-green-500/30'>
-            <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12'>
+        <div className='min-h-screen bg-black text-zinc-200 p-4 md:p-8 font-sans selection:bg-green-500/30 flex flex-col gap-8'>
+            {/* Top Navbar */}
+            <nav className="w-full max-w-7xl mx-auto flex items-center justify-between py-4 border-b border-zinc-800">
+                <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+                    <span className="p-1.5 bg-green-600 rounded-lg text-white font-bold text-sm leading-none flex items-center justify-center">CP</span>
+                    <span className="font-bold text-lg text-white tracking-wide">CareerPilot.ai</span>
+                </div>
+                <div className="flex items-center gap-4">
+                    {user && (
+                        <div className="hidden sm:flex flex-col items-end text-right">
+                            <span className="text-sm font-semibold text-zinc-200">{user.username}</span>
+                            <span className="text-xs text-zinc-500">{user.email}</span>
+                        </div>
+                    )}
+                    <button 
+                        onClick={handleLogout}
+                        className="px-4 py-2 text-xs font-semibold text-zinc-300 hover:text-white bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-xl transition-all flex items-center gap-2"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Logout
+                    </button>
+                </div>
+            </nav>
+
+            <div className='max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:gap-12 w-full'>
 
                 {/* ── Left Nav ── */}
                 <nav className='w-full lg:w-64 flex-shrink-0 flex flex-col gap-8'>

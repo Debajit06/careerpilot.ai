@@ -6,7 +6,7 @@ import { useAuth } from '../../auth/hooks/useAuth.js';
 import { useNavigate, Navigate } from 'react-router-dom';
 
 function Home() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, handleLogout } = useAuth();
   const { loading, generateReport, reports } = useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
@@ -50,6 +50,33 @@ function Home() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 flex flex-col justify-between p-4 md:p-8 font-sans">
       
+      {/* Top Navbar */}
+      <nav className="w-full max-w-5xl mx-auto flex items-center justify-between py-4 border-b border-gray-800 mb-6">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+          <span className="p-1.5 bg-green-600 rounded-lg text-white font-bold text-sm leading-none flex items-center justify-center">CP</span>
+          <span className="font-bold text-lg text-white tracking-wide">CareerPilot.ai</span>
+        </div>
+        <div className="flex items-center gap-4">
+          {user && (
+            <div className="hidden sm:flex flex-col items-end text-right">
+              <span className="text-sm font-semibold text-gray-200">{user.username}</span>
+              <span className="text-xs text-gray-500">{user.email}</span>
+            </div>
+          )}
+          <button 
+            onClick={handleLogout}
+            className="px-4 py-2 text-xs font-semibold text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-700 rounded-xl transition-all flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Logout
+          </button>
+        </div>
+      </nav>
+
       {/* Page Header */}
       <header className="max-w-4xl mx-auto text-center my-8 md:my-12">
         <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
